@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4.1.2
       - name: TODO-REMOVE
         run: |
-          git fetch --depth=10
+          git fetch --deepen=0
           (git show HEAD~1:pyproject.toml | head -7 | tail -1) || true
           (git show HEAD^:pyproject.toml | head -7 | tail -1) || true
           (git show HEAD:pyproject.toml | head -7 | tail -1) || true
