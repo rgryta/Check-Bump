@@ -1,1 +1,33 @@
+[build-system]
+requires = ["setuptools>=67.4.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "check-bump"
+version = "0.0.1"
+authors = [
+    { name="Radoslaw Gryta", email="radek.gryta@gmail.com" },
+]
+description = "Do not allow prints in your code"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["versioning", "check", "CI", "CD", "version", "bump"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://github.com/rgryta/Check-Bump"
+"Bug Tracker" = "https://github.com/rgryta/Check-Bump/issues"
+
+[project.scripts]
+check_bump = "check_bump:main"
+
+####### SETUPTOOLS #######
+
+[tool.setuptools.package-dir]
+"check_bump" = "check_bump"
 
