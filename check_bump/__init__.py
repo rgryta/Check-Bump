@@ -15,6 +15,7 @@ from tomlkit import parse
 
 logger = logging.getLogger(__name__)
 
+
 def main():  # pragma: no cover
     """
     Checking if version was bumped in pyproject.toml file in last git commit
