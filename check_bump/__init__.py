@@ -14,10 +14,13 @@ from tomlkit import parse
 
 
 def main():
+    """
+    Checking if version was bumped in pyproject.toml file in last git commit
+    """
     file_name = "pyproject.toml"
     path = pathlib.Path(os.getcwd()) / file_name
 
-    with open(path) as file:
+    with open(path, encoding="utf-8") as file:
         current_version = parse(file.read())["project"]["version"]
 
     result = subprocess.run(shlex.split(f"git show HEAD~1:{file_name}"), capture_output=True, check=True)
