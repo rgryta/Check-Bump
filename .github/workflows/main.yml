@@ -36,8 +36,8 @@ jobs:
         run: |
           isort -c .
           black --check .
-          pylint cyclic_classes tests tests/packages/**/cc_one tests/packages/**/cc_two
-          noprint -ve cyclic_classes tests
+          pylint check_bump
+          noprint -ve check_bump tests
       - name: Test
         run: |
           coverage run -m pytest -xv tests
