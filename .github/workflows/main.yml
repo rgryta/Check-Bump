@@ -77,7 +77,3 @@ jobs:
               ref: "refs/tags/${{ steps.version.outputs.version }}",
               sha: context.sha
             })
-      - name: Create Release
-        if: steps.version.outputs.exitcode == '0'
-        uses: softprops/action-gh-release@v2
-            
