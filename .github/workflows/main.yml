@@ -64,7 +64,7 @@ jobs:
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
       - name: GitHub Script
         uses: actions/github-script@v7.0.1
-        if: steps.version.outputs.exitcode == "0"
+        if: steps.version.outputs.exitcode == '0'
         env:
           VERSION: ${{ steps.version.outputs.version }}
         with:
