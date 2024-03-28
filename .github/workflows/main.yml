@@ -29,9 +29,9 @@ jobs:
       - name: Install Development Packages
         run: |
           # Linting
-          pip install black isort noprint pylint -y
+          pip install black isort noprint pylint
           # Testing
-          pip install mock pytest pytest-sugar pytest-xdist pytest-asyncio pytest-timeout coverage[toml] -y
+          pip install mock pytest pytest-sugar pytest-xdist pytest-asyncio pytest-timeout coverage[toml]
       - name: Lint
         run: |
           isort -c .
