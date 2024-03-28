@@ -1,7 +1,7 @@
 <p align="center"></p>
 <h2 align="center">Check Bump</h2>
 <p align="center">
-<a href="https://github.com/rgryta/Check-Bump/actions/workflows/main.yml"><img alt="Python package" src="https://github.com/rgryta/Check-Bump/actions/workflows/main.yml/badge.svg?branch=main"></a>
+<a href="https://github.com/rgryta/Check-Bump/actions/workflows/main.yml"><img alt="Build" src="https://github.com/rgryta/Check-Bump/actions/workflows/main.yml/badge.svg?branch=main"></a>
 <a href="https://pypi.org/project/check-bump/"><img alt="PyPI" src="https://img.shields.io/pypi/v/check-bump"></a>
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 <a href="https://github.com/PyCQA/pylint"><img alt="pylint" src="https://img.shields.io/badge/linting-pylint-yellowgreen"></a>
