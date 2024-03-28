@@ -2,6 +2,7 @@
 Unit tests
 """
 
+
 def test():
     """
     Dummy test
