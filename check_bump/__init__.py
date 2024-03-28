@@ -20,9 +20,7 @@ def main():
     with open(path) as file:
         current_version = parse(file.read())["project"]["version"]
 
-    result = subprocess.run(
-        shlex.split(f"git show HEAD~1:{file_name}"), capture_output=True, check=True
-    )
+    result = subprocess.run(shlex.split(f"git show HEAD~1:{file_name}"), capture_output=True, check=True)
     old_version = parse(result.stdout.decode().strip())["project"]["version"]
 
     if old_version != current_version:
