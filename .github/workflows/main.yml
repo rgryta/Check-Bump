@@ -18,14 +18,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4.1.2
-      - name: TODO-REMOVE
-        run: |
-          git fetch --deepen=0
-          (git show HEAD~1:pyproject.toml | head -7 | tail -1) || true
-          (git show HEAD^:pyproject.toml | head -7 | tail -1) || true
-          (git show HEAD:pyproject.toml | head -7 | tail -1) || true
-          git show-ref --head
-          exit 1
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
