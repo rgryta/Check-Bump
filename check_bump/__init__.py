@@ -27,6 +27,6 @@ def main():
     old_version = parse(result.stdout.decode().strip())["project"]["version"]
 
     if old_version != current_version:
-        print(current_version)
+        sys.stdout.write(current_version)
         sys.exit(0)
     sys.exit(1)
