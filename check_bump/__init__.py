@@ -29,7 +29,8 @@ def main():  # pragma: no cover
     try:
         result = subprocess.run(shlex.split(f"git show HEAD~1:{file_name}"), capture_output=True, check=True)
     except subprocess.CalledProcessError as exc:
-        logger.exception(exc)
+        sys.stderr.write(f"{exc.stdout=}")
+        sys.stderr.write(f"{exc.stderr=}")
         raise exc
     old_version = parse(result.stdout.decode().strip())["project"]["version"]
 
