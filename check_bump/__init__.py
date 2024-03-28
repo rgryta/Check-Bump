@@ -29,7 +29,7 @@ def main():  # pragma: no cover
 
     # Old version
     try:
-        subprocess.run(shlex.split(f"git fetch --deepen=1"), capture_output=True, check=True)
+        subprocess.run(shlex.split("git fetch --deepen=1"), capture_output=True, check=True)
         result = subprocess.run(shlex.split(f"git show HEAD^:{file_name}"), capture_output=True, check=True)
     except subprocess.CalledProcessError as exc:
         sys.stderr.write(f"{exc.stdout=}")
