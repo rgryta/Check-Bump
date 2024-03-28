@@ -21,19 +21,23 @@ def main():  # pragma: no cover
     Checking if version was bumped in pyproject.toml file in last git commit
     """
     file_name = "pyproject.toml"
-    path = pathlib.Path(os.getcwd()) / file_name
 
+    # New version
+    path = pathlib.Path(os.getcwd()) / file_name
     with open(path, encoding="utf-8") as file:
         current_version = parse(file.read())["project"]["version"]
 
+    # Old version
     try:
-        result = subprocess.run(shlex.split(f"git show HEAD~1:{file_name}"), capture_output=True, check=True)
+        subprocess.run(shlex.split(f"git fetch --deepen=1"), capture_output=True, check=True)
+        result = subprocess.run(shlex.split(f"git show HEAD^:{file_name}"), capture_output=True, check=True)
     except subprocess.CalledProcessError as exc:
         sys.stderr.write(f"{exc.stdout=}")
         sys.stderr.write(f"{exc.stderr=}")
         raise exc
     old_version = parse(result.stdout.decode().strip())["project"]["version"]
 
+    # Check
     if old_version != current_version:
         sys.stdout.write(current_version)
         sys.exit(0)
