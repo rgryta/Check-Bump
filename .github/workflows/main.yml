@@ -22,6 +22,8 @@ jobs:
         run: |
           (git show HEAD~1:pyproject.toml | head -7 | tail -1) || true
           (git show HEAD^:pyproject.toml | head -7 | tail -1) || true
+          git show-ref --head
+          exit 1
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
