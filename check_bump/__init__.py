@@ -13,7 +13,7 @@ import subprocess
 from tomlkit import parse
 
 
-def main():
+def main():  # pragma: no cover
     """
     Checking if version was bumped in pyproject.toml file in last git commit
     """
