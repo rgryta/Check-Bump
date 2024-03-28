@@ -17,7 +17,8 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = []
+dependencies = ["tomlkit"]
+dynamic = ["optional-dependencies"]
 
 [project.urls]
 "Homepage" = "https://github.com/rgryta/Check-Bump"
@@ -30,6 +31,9 @@ check_bump = "check_bump:main"
 
 [tool.setuptools.package-dir]
 "check_bump" = "check_bump"
+
+[tool.setuptools.dynamic]
+optional-dependencies = { dev = {file = ["requirements_dev.txt"]} }
 
 ####### BUMPV #######
 
