@@ -31,3 +31,43 @@ check_bump = "check_bump:main"
 [tool.setuptools.package-dir]
 "check_bump" = "check_bump"
 
+####### BUMPV #######
+
+[tool.bumpversion]
+current_version = "0.0.1"
+allow_dirty = true
+commit = true
+message = "[Version {new_version}]"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = "version = \"{current_version}\""
+replace = "version = \"{new_version}\""
+
+####### BLACK #######
+
+[tool.black]
+line-length = 120
+preview = true
+
+####### COVERAGE #######
+
+[tool.coverage.run]
+source = ["check_bump/"]
+
+####### ISORT #######
+
+[tool.isort]
+profile = "black"
+line_length = 120
+length_sort = true
+atomic = true
+
+####### PYLINT #######
+
+[tool.pylint.main]
+disable = ["logging-fstring-interpolation"]
+output-format = "colorized"
+
+[tool.pylint.format]
+max-line-length = 120
