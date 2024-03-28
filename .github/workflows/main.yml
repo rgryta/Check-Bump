@@ -36,7 +36,7 @@ jobs:
         run: |
           isort -c .
           black --check .
-          pylint check_bump
+          pylint check_bump tests
           noprint -ve check_bump tests
       - name: Test
         run: |
