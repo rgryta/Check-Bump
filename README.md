@@ -19,3 +19,72 @@ Otherwise, process will finish with exit code 1.
 ## Requirements
 
 This package requires `tomlkit` package.
+
+## Usage
+
+Simply execute `check-bump` within a directory where your `pyproject.toml` is located. Or provide a path using `--path` argument.
+
+```bash
+user$ check-bump --help
+usage: check-bump [-h] [-p PATH]
+
+Detect and retrieve version bump
+
+options:
+  -h, --help            show this help message and exit
+  -p PATH, --path PATH  path to pyproject.toml file
+```
+
+## Development
+
+### Installation
+
+Install virtual environment and check_bump package in editable mode with dev dependencies.
+
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -e .[dev]
+```
+
+
+### Formatting
+
+Use black and isort (with black profile) to format the code.
+
+```bash
+isort .
+black .
+```
+
+### Syntax checks
+
+Use pylint to check the code for errors and potential problems.
+Also use noprint to detect print statements in the code (use logging instead!).
+
+```bash
+isort -c .
+black --check .
+pylint check_bump tests
+noprint -ve check_bump tests
+```
+
+### Testing
+
+For testing use coverage with pytest workers - this is due to errors that pytest-cov sometimes has with Python 3.9 and above.
+
+```bash
+coverage run -m pytest -xv tests
+coverage report -m --fail-under=30
+coverage erase
+```
+
+### Clean up
+
+Clean up the project directory from temporary files and directories. Purge virual environment.
+
+```bash
+coverage erase
+rm -rf check_bump.egg-info/ dist/ build/
+rm -rf venv/
+```
