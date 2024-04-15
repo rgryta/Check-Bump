@@ -1,6 +1,5 @@
 ### CI/CD ###
 staging
-toml-cli
 
 ### Syntax ###
 black
