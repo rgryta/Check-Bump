@@ -52,7 +52,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check bump
         id: vbump
-        uses: rgryta/Check-Bump@gha
+        uses: rgryta/Check-Bump@v1.0.2
         with:
           prefix: 'v'
       - name: Push Tag
