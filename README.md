@@ -90,43 +90,12 @@ pip install -e .[dev]
 ```
 
 
-### Formatting
+### How to?
 
-Use black and isort (with black profile) to format the code.
-
-```bash
-isort .
-black .
-```
-
-### Syntax checks
-
-Use pylint to check the code for errors and potential problems.
-Also use noprint to detect print statements in the code (use logging instead!).
+Automate as much as we can, see configuration in `pyproject.toml` file to see what are the flags used.
 
 ```bash
-isort -c .
-black --check .
-pylint check_bump tests
-noprint -ve check_bump tests
-```
-
-### Testing
-
-For testing use coverage with pytest workers - this is due to errors that pytest-cov sometimes has with Python 3.9 and above.
-
-```bash
-coverage run -m pytest -xv tests
-coverage report -m --fail-under=30
-coverage erase
-```
-
-### Clean up
-
-Clean up the project directory from temporary files and directories. Purge virual environment.
-
-```bash
-coverage erase
-rm -rf check_bump.egg-info/ dist/ build/
-rm -rf venv/
+staging format  # Reformat the code
+staging lint    # Check for linting issues
+staging test    # Run unit tests and coverage report
 ```

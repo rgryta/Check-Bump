@@ -113,5 +113,3 @@ format = {flags="--check", package="check_bump"}
 steps = [
     {parallel = {steps = ["isort", "black", "pylint", "noprint"]}},
 ]
-
-
