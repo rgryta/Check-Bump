@@ -22,6 +22,8 @@ This package requires `tomlkit` package.
 
 ## Usage
 
+### Command
+
 Simply execute `check-bump` within a directory where your `pyproject.toml` is located. Or provide a path using `--path` argument.
 
 ```bash
@@ -33,6 +35,46 @@ Detect and retrieve version bump
 options:
   -h, --help            show this help message and exit
   -p PATH, --path PATH  path to pyproject.toml file
+```
+
+### Github Actions
+
+#### Inputs
+
+##### `path`
+
+**Optional** Relative path of pyproject.toml file. Example: `'python_src/pyproject.toml'`
+
+##### `prefix`
+
+**Optional** Prefix to provide for version output. Example: `'v'`
+
+#### Outputs
+
+##### `bump`
+
+**always** Whether there was a bump or not. Values: `'true'`|`'false'`
+
+##### `version`
+
+**optional** Current (if bumped) version with prefix. If there was no version bump - no output is provided.
+
+## Example usage
+
+```yml
+- name: Check bump
+  id: vbump
+  uses: rgryta/Check-Bump@main
+  with:
+    prefix: 'v'
+```
+
+And then you can later reference like:
+```yml
+- name: Tag repository
+  if: steps.vbump.outputs.bump == 'true'
+  run: |
+    echo "I was bumped to version: ${{ steps.vbump.outputs.version }}"
 ```
 
 ## Development

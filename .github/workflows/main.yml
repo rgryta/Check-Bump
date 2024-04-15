@@ -50,26 +50,20 @@ jobs:
       
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Check bump
+        id: vbump
+        uses: rgryta/Check-Bump@main
         with:
-          python-version: "3.12"
-      - name: Get Tag from Check-Bump
-        id: version
-        run: |
-          pip install check-bump
-          currv=$(check-bump) && echo "version=v$currv" >> "$GITHUB_OUTPUT"
-          exitcode="$?"
-          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+          prefix: 'v'
       - name: Push Tag
         uses: actions/github-script@v7
-        if: steps.version.outputs.exitcode == '0'
+        if: steps.vbump.outputs.bump == 'true'
         with:
           github-token: ${{ secrets.GH_ACTIONS_TOKEN }}  # PAT Token that has repo and hooks permissions (403 or 404 HTTP errors otherwise)
           script: |
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.version.outputs.version }}",
+              ref: "refs/tags/${{ steps.vbump.outputs.version }}",
               sha: context.sha
             })

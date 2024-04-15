@@ -48,6 +48,12 @@ filename = "pyproject.toml"
 search = "version = \"{current_version}\""
 replace = "version = \"{new_version}\""
 
+
+[[tool.bumpversion.files]]
+filename = "action.yml"
+search = "      run: pip install \"check-bump=={current_version}\""
+replace = "      run: pip install \"check-bump=={new_version}\""
+
 ####### BLACK #######
 
 [tool.black]

@@ -1,0 +1,36 @@
+name: 'Check Bump'
+description: 'Check if project version was bumped in comparison to previous commit'
+inputs:
+  path:
+    description: 'Path of pyproject.toml file'
+    required: false
+  prefix:
+    description: 'Prefix to provide for version output'
+    required: false
+outputs:
+  bump:
+    description: 'Whether there was a bump or not [true|false]'
+    value: ${{ steps.check-bump.outputs.bump }}
+  version:
+    description: 'Current (bumped) version with prefix'
+    value: ${{ steps.check-bump.outputs.version }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install check-bump
+      shell: bash
+      run: pip install "check-bump==1.0.0"
+    - name: Pass Inputs to Shell
+      id: check-bump
+      shell: bash
+      run: |
+          args=""
+          test -z "${{ inputs.path }}" || args="${args} -p ${{ inputs.path }}"
+          
+          currv=$(check-bump $args) && echo "version=${{ inputs.prefix }}$currv" >> "$GITHUB_OUTPUT"
+          exitcode="$?"
+          ([[ ${exitcode} -gt 0 ]] && echo "bump=false" || echo "bump=true") >> $GITHUB_OUTPUT
