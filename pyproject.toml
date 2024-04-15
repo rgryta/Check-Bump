@@ -8,7 +8,7 @@ version = "1.0.1"
 authors = [
     { name="Radoslaw Gryta", email="radek.gryta@gmail.com" },
 ]
-description = "Do not allow prints in your code"
+description = "Check if pyproject.toml version was bumped"
 readme = "README.md"
 requires-python = ">=3.8"
 keywords = ["versioning", "check", "CI", "CD", "version", "bump"]
