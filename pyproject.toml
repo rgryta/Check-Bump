@@ -10,7 +10,7 @@ authors = [
 ]
 description = "Check if pyproject.toml version was bumped"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 keywords = ["versioning", "check", "CI", "CD", "version", "bump"]
 classifiers = [
     "Programming Language :: Python :: 3",
