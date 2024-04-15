@@ -25,24 +25,13 @@ jobs:
       - name: Install
         run: |
           python -m pip install --upgrade pip
-          pip install -e .
-      - name: Install Development Packages
-        run: |
-          # Linting
-          pip install black isort noprint pylint
-          # Testing
-          pip install mock pytest pytest-sugar pytest-xdist pytest-asyncio pytest-timeout coverage[toml]
+          pip install -e .[dev]
       - name: Lint
         run: |
-          isort -c .
-          black --check .
-          pylint check_bump tests
-          noprint -ve check_bump tests
+          staging lint
       - name: Test
         run: |
-          coverage run -m pytest -xv tests
-          coverage report -m --fail-under=30
-          coverage erase
+          staging test
   tag:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'

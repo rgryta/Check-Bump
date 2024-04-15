@@ -81,3 +81,37 @@ output-format = "colorized"
 
 [tool.pylint.format]
 max-line-length = 120
+
+####### STAGING #######
+[tool.staging.steps]
+# Lint
+isort = { execute = "isort {flags} . tests", format = {flags = "flags"}}
+black = { execute = "black {flags} . tests", format = {flags = "flags"}}
+pylint = { execute = "pylint {package} tests", format = {package = "package"}}
+noprint = { execute = "noprint -ve {package} tests", format = {package = "package"}}
+# Test
+coverage = { prepare = "coverage run -m pytest -xv tests", execute = "coverage report -m --fail-under=30", cleanup = "coverage erase"}
+
+[tool.staging.stages.test]
+description = "Test the package"
+format = {package="check_bump"}
+steps = [
+    {step = "coverage"},
+]
+
+[tool.staging.stages.format]
+description = "Test the package"
+format = {package="check_bump"}
+steps = [
+    {step = "isort"},
+    {step = "black"},
+]
+
+[tool.staging.stages.lint]
+description = "Test the package"
+format = {flags="--check", package="check_bump"}
+steps = [
+    {parallel = {steps = ["isort", "black", "pylint", "noprint"]}},
+]
+
+
