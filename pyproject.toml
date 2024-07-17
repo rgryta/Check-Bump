@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "check-bump"
-version = "1.0.2"
+version = "1.1.0"
 authors = [
     { name="Radoslaw Gryta", email="radek.gryta@gmail.com" },
 ]
@@ -38,7 +38,7 @@ optional-dependencies = { dev = {file = ["requirements_dev.txt"]} }
 ####### BUMPV #######
 
 [tool.bumpversion]
-current_version = "1.0.2"
+current_version = "1.1.0"
 allow_dirty = true
 commit = true
 message = "[Version {new_version}]"

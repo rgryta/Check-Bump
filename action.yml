@@ -30,7 +30,7 @@ runs:
         python-version: '3.12'
     - name: Install check-bump
       shell: bash
-      run: pip install "check-bump==1.0.2"
+      run: pip install "check-bump==1.1.0"
     - name: Pass Inputs to Shell
       id: check-bump
       shell: bash
