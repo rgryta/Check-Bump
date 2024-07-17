@@ -11,7 +11,7 @@
 ## About
 
 Want to add version bump checks to your CI/CD pipeline? This packages makes it easy.
-Simply execute `check-vbump` within a directory where your `pyproject.toml` is located.
+Simply execute `check-bump` within a directory where your `pyproject.toml` is located.
 
 If there was a version bump, process will finish with exit code 0 - read stdout for the new version.
 Otherwise, process will finish with exit code 1.
@@ -28,22 +28,31 @@ Simply execute `check-bump` within a directory where your `pyproject.toml` is lo
 
 ```bash
 user$ check-bump --help
-usage: check-bump [-h] [-p PATH]
+usage: check-bump [-h] {toml,regex,touch} ...
 
 Detect and retrieve version bump
 
 options:
-  -h, --help            show this help message and exit
-  -p PATH, --path PATH  path to pyproject.toml file
+  -h, --help          show this help message and exit
+
+Methods:
+  {toml,regex,touch}  Different methods for parsing files
+    toml              Parsing toml file
+    regex             Regex file parsing
+    touch             Touch file check
 ```
 
 ### Github Actions
 
 #### Inputs
 
+##### `method`
+
+**Required** Select which method to use for detecting version bumps.
+
 ##### `path`
 
-**Optional** Relative path of pyproject.toml file. Example: `'python_src/pyproject.toml'`
+**Optional** Relative path of versioning file. Example: `'python_src/pyproject.toml'`
 
 ##### `prefix`
 
@@ -66,6 +75,7 @@ options:
   id: vbump
   uses: rgryta/Check-Bump@main
   with:
+    method: 'toml'
     prefix: 'v'
 ```
 
