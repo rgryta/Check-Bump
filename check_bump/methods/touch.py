@@ -2,7 +2,6 @@
 This module contains the methods for the touch check bump.
 """
 
-import re
 import sys
 import shlex
 import logging
@@ -15,13 +14,17 @@ logger = logging.getLogger(__name__)
 
 
 def argparser(subparsers: argparse._SubParsersAction) -> None:  # pragma: no cover
-    """Create argparse subparser for toml method"""
+    """
+    Create argparse subparser for toml method
+    """
     parser = subparsers.add_parser("touch", help="Touch file check")
     parser.add_argument("-p", "--path", type=str, default="pyproject.toml", help="Path to file that manages versions")
 
 
 def check(args):
-    """Check bump with touch method"""
+    """
+    Check bump with touch method
+    """
     file_path = get_file_path(args.path)
 
     # New version

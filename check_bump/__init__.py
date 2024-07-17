@@ -16,6 +16,10 @@ logger = logging.getLogger(__name__)
 
 
 class VersionChecker(StrEnum):
+    """
+    Available version checkers
+    """
+
     TOML = auto()
     REGEX = auto()
     TOUCH = auto()

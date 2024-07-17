@@ -17,7 +17,9 @@ logger = logging.getLogger(__name__)
 
 
 def argparser(subparsers: argparse._SubParsersAction) -> None:  # pragma: no cover
-    """Create argparse subparser for toml method"""
+    """
+    Create argparse subparser for toml method
+    """
     parser = subparsers.add_parser("toml", help="Parsing toml file")
     parser.add_argument(
         "-p", "--path", type=str, default="pyproject.toml", help="Path to toml file that manages versions"
@@ -47,7 +49,7 @@ def check(args: argparse.Namespace):  # pragma: no cover
     """
     file_path = get_file_path(args.path)
 
-    if not str(file_path.parts[-1]) == "pyproject.toml":
+    if str(file_path.parts[-1]) != "pyproject.toml":
         logger.warning(f"Not a pyproject.toml file: {file_path}")
 
     # New version

@@ -15,7 +15,9 @@ logger = logging.getLogger(__name__)
 
 
 def argparser(subparsers: argparse._SubParsersAction) -> None:  # pragma: no cover
-    """Create argparse subparser for toml method"""
+    """
+    Create argparse subparser for toml method
+    """
     parser = subparsers.add_parser("regex", help="Regex file parsing")
     parser.add_argument("-p", "--path", type=str, default="pyproject.toml", help="Path to file that manages versions")
     parser.add_argument(
@@ -33,16 +35,18 @@ def _get_version(file_content: str, args: argparse.Namespace) -> str:
     """
     match = re.match(args.regex, file_content, flags=re.DOTALL)
     if not match:
-        logger.error(f"Version not found in file")
+        logger.error("Version not found in file")
         sys.exit(2)
     return match.group(1)
 
 
 def check(args):
-    """Check bump with regex method"""
+    """
+    Check bump with regex method
+    """
     file_path = get_file_path(args.path)
 
-    # New version
+    # New version  # pylint:disable=R0801
     with open(file_path, encoding="utf-8") as file:
         current_version = _get_version(file.read(), args)
 
