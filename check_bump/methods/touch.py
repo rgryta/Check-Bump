@@ -33,7 +33,7 @@ def check(args):
     # Old version
     rel_path = get_repo_file(file_path)
     old_version = subprocess.run(
-        shlex.split(f"git diff --quiet HEAD\^ HEAD -- '{rel_path}'"), capture_output=True, check=False
+        shlex.split(f"git diff --quiet HEAD^ HEAD -- '{rel_path}'"), capture_output=True, check=False
     ).returncode
 
     # Check
