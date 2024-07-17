@@ -17,7 +17,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = ["tomlkit"]
+dependencies = ["tomlkit", "jsonpath-ng"]
 dynamic = ["optional-dependencies"]
 
 [project.urls]
@@ -47,7 +47,6 @@ message = "[Version {new_version}]"
 filename = "pyproject.toml"
 search = "version = \"{current_version}\""
 replace = "version = \"{new_version}\""
-
 
 [[tool.bumpversion.files]]
 filename = "action.yml"
