@@ -6,13 +6,16 @@ inputs:
     description: 'Version checking method'
     options:
       - toml
-      - rgx
+      - regex
       - touch
   path:
     description: 'Path of a version management file, e.g. pyproject.toml'
     required: false
   prefix:
     description: 'Prefix to provide for version output'
+    required: false
+  regex:
+    description: 'Regex to use (regex method only)'
     required: false
 outputs:
   bump:
@@ -37,6 +40,7 @@ runs:
       run: |
           args=""
           test -z "${{ inputs.path }}" || args="${args} --path ${{ inputs.path }}"
+          test -z "${{ inputs.regex }}" || args="${args} --regex ${{ inputs.regex }}"
           
           currv=$(check-bump ${{ inputs.method }} $args) && echo "version=${{ inputs.prefix }}$currv" >> "$GITHUB_OUTPUT"
           exitcode="$?"
