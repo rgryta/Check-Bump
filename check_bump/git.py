@@ -55,11 +55,12 @@ def git_deepen(depth: int = 1):
     Deepen the git repository
     """
 
+    depth_check = git_depth_check(depth)
+    if depth_check:
+        return
+
     @with_lockfile(path=str(git_repo_path() / ".git" / "check-bump.lock"))
     def _inner():
-        depth_check = git_depth_check(depth)
-        if depth_check:
-            return
         try:
             subprocess.run(shlex.split(f"git fetch --deepen={depth}"), capture_output=True, check=True)
         except subprocess.CalledProcessError as exc:
