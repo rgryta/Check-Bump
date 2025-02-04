@@ -7,8 +7,8 @@ import sys
 import logging
 import pathlib
 
-from check_bump import ExitCode
-from check_bump.git import git_repo_path
+from .git import git_repo_path
+from .exit_codes import ExitCode
 
 logger = logging.getLogger(__name__)
 

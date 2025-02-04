@@ -6,7 +6,7 @@ import shlex
 import pathlib
 import subprocess
 
-from check_bump.util import with_lockfile
+from .util import with_lockfile
 
 
 def is_git_present() -> bool:  # pragma: no cover

@@ -8,8 +8,8 @@ import logging
 import argparse
 import subprocess
 
-from check_bump import ExitCode
-from check_bump.path import get_file_path, get_repo_file
+from ..path import get_file_path, get_repo_file
+from ..exit_codes import ExitCode
 
 logger = logging.getLogger(__name__)
 
