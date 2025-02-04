@@ -8,7 +8,8 @@ import logging
 import argparse
 import subprocess
 
-from check_bump.path import get_file_path, get_repo_file
+from ..path import get_file_path, get_repo_file
+from ..exit_codes import ExitCode
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,6 @@ def check(args):
 
     # Check
     if old_version == current_version:
-        sys.exit(0)
+        sys.exit(ExitCode.BUMP.value)
     logger.info(f"Version was not bumped: [{current_version}]")
-    sys.exit(1)
+    sys.exit(ExitCode.NO_BUMP.value)

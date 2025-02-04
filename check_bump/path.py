@@ -7,7 +7,8 @@ import sys
 import logging
 import pathlib
 
-from check_bump.git import git_repo_path
+from .git import git_repo_path
+from .exit_codes import ExitCode
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ def get_file_path(path: str) -> pathlib.Path:
     # Check if file exists under path and if it is a `pyproject.toml` file
     if not file_path.exists():
         logger.error(f"File or directory does not exist: {file_path}")
-        sys.exit(2)
+        sys.exit(ExitCode.VERSION_FILE_ERROR.value)
 
     if not file_path.is_file():
         if file_path.is_dir() and (new_path := file_path / "pyproject.toml").is_file():
@@ -33,7 +34,7 @@ def get_file_path(path: str) -> pathlib.Path:
             logger.info(f"Provided path is a directory, using {file_path}")
         else:
             logger.error(f"[{file_path}] is not a path to `pyproject.toml`")
-            sys.exit(2)
+            sys.exit(ExitCode.VERSION_FILE_ERROR.value)
 
     if str(file_path.parts[-1]) != "pyproject.toml":
         logger.warning(f"Not a pyproject.toml file: {file_path}")
