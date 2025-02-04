@@ -44,7 +44,7 @@ def git_depth_check(depth: int = 1):
     Check the depth of the git repository
     """
 
-    result = subprocess.run(shlex.split(f"git show HEAD~{depth}"))
+    result = subprocess.run(shlex.split(f"git show HEAD~{depth}"), capture_output=True)
     if result.returncode != 0:
         return False
     return True
