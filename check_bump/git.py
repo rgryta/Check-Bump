@@ -6,6 +6,8 @@ import shlex
 import pathlib
 import subprocess
 
+from check_bump.util import with_lockfile
+
 
 def is_git_present() -> bool:  # pragma: no cover
     """
@@ -35,3 +37,32 @@ def git_repo_path() -> pathlib.Path:  # pragma: no cover
     """
     result = subprocess.run(shlex.split("git rev-parse --show-toplevel"), capture_output=True, check=True)
     return pathlib.Path(result.stdout.decode().strip())
+
+
+def git_depth_check(depth: int = 1):
+    """
+    Check the depth of the git repository
+    """
+
+    result = subprocess.run(shlex.split(f"git show HEAD~{depth}"))
+    if result.returncode != 0:
+        return False
+    return True
+
+
+def git_deepen(depth: int = 1):
+    """
+    Deepen the git repository
+    """
+
+    @with_lockfile(path=str(git_repo_path() / ".git" / "check-bump.lock"))
+    def _inner():
+        depth_check = git_depth_check(depth)
+        if depth_check:
+            return
+        try:
+            subprocess.run(shlex.split(f"git fetch --deepen={depth}"), capture_output=True, check=True)
+        except subprocess.CalledProcessError as exc:
+            raise exc
+
+    _inner()

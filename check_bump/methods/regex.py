@@ -9,6 +9,8 @@ import logging
 import argparse
 import subprocess
 
+from check_bump import ExitCode
+from check_bump.git import git_deepen
 from check_bump.path import get_file_path, get_repo_file
 
 logger = logging.getLogger(__name__)
@@ -53,18 +55,18 @@ def check(args):
     # Old version
     rel_path = get_repo_file(file_path)
     try:
-        subprocess.run(shlex.split("git fetch --deepen=1"), capture_output=True, check=True)
+        git_deepen(depth=1)
         result = subprocess.run(shlex.split(f"git show HEAD^:{rel_path}"), capture_output=True, check=True)
     except subprocess.CalledProcessError as exc:
         logger.error(f"{exc.stdout=}")
         logger.error(f"{exc.stderr=}")
-        raise exc
+        sys.exit(ExitCode.GIT_ERROR.value)
 
     old_version = _get_version(result.stdout.decode().strip(), args)
 
     # Check
     if old_version != current_version:
         sys.stdout.write(current_version)
-        sys.exit(0)
+        sys.exit(ExitCode.BUMP.value)
     logger.info(f"Version was not bumped: [{current_version}]")
-    sys.exit(1)
+    sys.exit(ExitCode.NO_BUMP.value)

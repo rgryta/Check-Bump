@@ -11,6 +11,7 @@ from enum import StrEnum, auto
 
 from . import methods
 from .git import is_git_repo, git_repo_path, is_git_present
+from .exit_codes import ExitCode
 
 logger = logging.getLogger(__name__)
 
@@ -47,11 +48,11 @@ def main():  # pragma: no cover # pylint: disable=too-many-branches
     """
     if not is_git_present():
         logger.error("Git is not installed")
-        sys.exit(3)
+        sys.exit(ExitCode.GIT_ERROR.value)
 
     if not is_git_repo():
         logger.error("Not a git repository")
-        sys.exit(3)
+        sys.exit(ExitCode.GIT_ERROR.value)
 
     # Parse arguments
     args = _parse_args()
@@ -65,4 +66,4 @@ def main():  # pragma: no cover # pylint: disable=too-many-branches
             methods.touch.check(args)
         case _:
             logger.error("Unknown method")
-            sys.exit(99)
+            sys.exit(ExitCode.UNKNOWN_METHOD.value)
